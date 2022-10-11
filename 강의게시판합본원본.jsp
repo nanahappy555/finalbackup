@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<head>
-<title>jsp 페이지 제목입니다</title>
-</head>
-<body>
 
 <!-- ================================================= -->
 <!-- MAIN-CONTENT -->
 <!-- ================================================= -->
-<div class="main-content-jsp">
+<div class="container-fluid">
 	<!-- ================================================= -->
 	<!-- 본문 1 -->
 	<!-- ================================================= -->
@@ -225,5 +221,3 @@
 <!-- ================================================= -->
 <!-- MAIN-CONTENT 끝 -->
 <!-- ================================================= -->
-</body>
-</html>

@@ -6,7 +6,7 @@
 <!-- ================================================= -->
 <!-- MAIN-CONTENT -->
 <!-- ================================================= -->
-<div class="main-content-jsp">
+<div class="container-fluid">
 
 <!-- 111111 -->
 <div class="row">
@@ -21,28 +21,35 @@
 						<tbody>
 							<tr>
 								<th style="width:10%">제목</th>
-								<td colspan="3" class="table-title">복학문의</td>
+								<td colspan="5" class="table-title">복학문의</td>
 								
 							</tr>
 
 							<tr>
 								<th style="width:10%">작성자</th>
-								<td class="table-title">12학번 장재훈</td>
+								<td style="width:20%" class="table-title">12학번 장재훈</td>
 								<th style="width:10%">날짜</th>
-								<td class="table-title">2022-10-10</td>
+								<td style="width:20%" class="table-title">2022-10-10</td>
+								<th style="width:10%">조회수</th>
+								<td style="width:10%" class="table-title">10</td>
 							</tr>
 							<tr>
-								<th style="width:10%">조회</th>
-								<td colspan="3" class="table-title">10</td>
+								<th style="width:10%">첨부파일</th>
+								<td colspan="5" class="table-title">
+									2022-2 학생선택에 따른 SU평가제도 안내문.pdf</br>
+									2022-2 학생선택에 따른 SU평가제도 안내문.pdf</br>
+									학생선택에 따른 SU평가제도 안내문2022-2 학생선택에 따른 SU평가제도 안내문.xlsx</br>
+									
+								</td>
 							</tr>
 							<tr>
-								<td colspan="4" class="table-title">
+								<td colspan="6" class="table-title">
 									<p class="m-3">
 										안녕하세요 내용입니다 미정아 행복하십니까...</br>
 										ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</br>
 										sdfasdfasdfasdfasdfasdfasdf</br>
 										저 10월7일 오전 11시에 301번 탄 대전 주민이에요ㅎㅎ 몸이 불편하신 분이 탔는데 
-										아무말씀안하시고 친절하시게 응대해주셔서 놀랐습니당ㅠㅠㅠ 
+										아무말씀안하시고 친절하시게 응대해주셔서 놀랐습니당ㅠㅠㅠ </br>
 										처음뵈요 기사님 같은분!앞으로도 기사님 같은 분이 많아 지셔서 더 좋은 대전이 되었으면 좋겠다고 생각했어요
 										진짜 기사님 너무 멋있고 최고라고 생각해요 안전운전하세요:)!!
 									</p>
@@ -62,9 +69,9 @@
 <!-- 					<button class="btn btn-secondary" type="button" onclick="">삭제</button>&nbsp; -->
 <!-- 					<button class="btn btn-primary" type="button" onclick="">목록</button>&nbsp; -->
 <!-- 					<br> -->
-					<button class="btn btn-outline-primary" type="button" onclick="">수정</button>&nbsp;&nbsp;
-					<button class="btn btn-outline-danger" type="button" onclick="f_alert();">삭제</button>&nbsp;&nbsp;
-					<button class="btn btn-primary" type="button" onclick="">목록</button>&nbsp;&nbsp;
+					<button class="btn btn-outline-primary m-1" type="button" onclick="">수정</button>
+					<button class="btn btn-outline-danger m-1" type="button" onclick="f_alert();">삭제</button>
+					<button class="btn btn-primary m-1" type="button" onclick="">목록</button>
 				</div>
 				<!-- ================================================= -->
 				<!-- 버튼 끝 -->
@@ -100,14 +107,14 @@
 				<div class="timeline">
 					<!-- 여기 댓글목록이 handlebars로 들어옴 -->
 					<div class="card replyDIV">
-						<span class="card-header d-flex justify-content-between">
-						<span><strong>이혜림</strong>&nbsp;&nbsp;2022/10/06</span>
-						<span>
-						<a href="#" class="btn btn-rounded btn-outline-primary btn-sm"
-							data-toggle="modal" data-target="#modifyModal">수정</a>
-						<a href="#" class="btn btn-rounded btn-outline-danger btn-sm"
-							onclick="f_alert();">삭제</a>
-						</span>
+						<span class="card-header d-flex justify-content-between align-items-center">
+							<span><strong>이혜림</strong>&nbsp;&nbsp;2022/10/06</span>
+							<span>
+							<a href="#" class="btn btn-rounded btn-outline-primary btn-sm"
+								data-toggle="modal" data-target="#modifyModal">수정</a>&nbsp;
+							<a href="#" class="btn btn-rounded btn-outline-danger btn-sm"
+								onclick="f_alert();">삭제</a>
+							</span>
 						
 						</span>
 						<span class="card-body">
@@ -118,23 +125,7 @@
 						진짜 기사님 너무 멋있고 최고라고 생각해요 안전운전하세요:)!!
 						</span>
 					</div>
-					<div class="card replyDIV">
-						<span class="card-header d-flex justify-content-between">
-						<span><strong>이혜림</strong>&nbsp;&nbsp;2022/10/06</span>
-						<span>
-						<a href="#" class="btn btn-rounded btn-outline-primary btn-sm">수정</a>
-						<a href="#" class="btn btn-rounded btn-outline-danger btn-sm">삭제</a>
-						</span>
-						
-						</span>
-						<span class="card-body">
-						안뇽하세요 댓글내용입니당
-						저 10월7일 오전 11시에 301번 탄 대전 주민이에요ㅎㅎ 몸이 불편하신 분이 탔는데 
-						아무말씀안하시고 친절하시게 응대해주셔서 놀랐습니당ㅠㅠㅠ 
-						처음뵈요 기사님 같은분!앞으로도 기사님 같은 분이 많아 지셔서 더 좋은 대전이 되었으면 좋겠다고 생각했어요
-						진짜 기사님 너무 멋있고 최고라고 생각해요 안전운전하세요:)!!
-						</span>
-					</div>
+					
 				<!-- 여기 댓글목록이 handlebars로 들어옴 -->
 				</div>
 				
@@ -148,10 +139,17 @@
 
 			<div class="card-footer">
 			<div class="col-xl-12">
-				<label for="newReplyText"><h3>댓글 작성</h3></label>
+				<div class="d-flex justify-content-between align-items-center">
+					<span>
+					<h3 style="display:inline;">댓글 작성</h3>
+					</span>
+					<span>
+					<button type="button" class="btn btn-primary" id="replyAddBtn" onclick="replyRegist_go();">등록</button>
+					</span>
+				</div>
+			</div>
+			<div class="col-xl-12 mt-1">
 				<textarea class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText"></textarea>
-				<br/>
-				<button type="button" class="btn btn-primary" id="replyAddBtn" onclick="replyRegist_go();">등록</button>
 			</div>
 			</div>
 
@@ -196,6 +194,12 @@
 
 
 </div>
+
+
+
+
+
+
 
 <script>
 function f_alert(){

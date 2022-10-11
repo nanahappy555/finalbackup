@@ -24,7 +24,7 @@
 							<tr>
 								<th style="width:10%">제목</th>
 								<td colspan="3" class="table-title">
-									<input type="text" id="title" value="복학문의"
+									<input type="text" id="title" value=""
 									name='title' class="form-control" placeholder="제목을 쓰세요">
 								</td>
 								
@@ -39,42 +39,21 @@
 						</tbody>
 					</table>
 				<div>
-										<div class="form-group">
-											<textarea class="textarea" name="content" id="content" rows="20"
-												cols="90" placeholder="1000자 내외로 작성하세요." >${fn:escapeXml(notice.content)}</textarea>
-										</div>
-									</p>
-							
-									<div class="form-group">								
-										<h5 class="ml-3" style="display:inline;line-height:40px;"><strong>파일첨부 </strong></h5>
-										&nbsp;&nbsp;<button class="btn btn-xs btn-light"
-										onclick="addFile_go();"	type="button" id="addFileBtn">+</button>
-									</div>									
-									<div class="ml-3 fileInput">
-									
-									
-									
-										<ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-											<!-- 첨부파일 썸네일 -->		
-											<c:forEach items="${pds.attachList }" var="attach" >
-												<li class="attach-item thumb${attach.ano }" file-name="${attach.fileName }" target-ano="${attach.ano }">																			
-												<div class="mailbox-attachment-info ">
-													<a class="mailbox-attachment-name" name="attachedFile" attach-fileName="${attach.fileName }" attach-no="${attach.ano }" href="<%=request.getContextPath()%>/pds/getFile.do?ano=${attach.ano }"  >													
-														<i class="fas fa-paperclip"></i>
-														${attach.fileName }&nbsp;&nbsp;
-														<button type="button" onclick="removeFile_go('thumb${attach.ano}');return false;" style="border:0;outline:0;" 
-																class="badge bg-red">X</button>																									
-													</a>													
-												</div>
-											</li>	
-											</c:forEach>								
-										</ul>
-<!-- 										<br/>	 -->
-									</div>
-							
-
-								</div>
-							</form>
+					<div class="form-group">
+						<textarea class="textarea" name="content" id="content" rows="20"
+							placeholder="1000자 내외로 작성하세요." style="display: none;"></textarea>
+					</div>
+				</div>
+				<div>
+					<div class="form-group">								
+						<h5 class="ml-3" style="display:inline;line-height:40px;"><strong>파일첨부 </strong></h5>
+						&nbsp;&nbsp;<button class="btn btn-xs btn-light"
+						onclick="addFile_go();"	type="button" id="addFileBtn">+</button>
+					</div>									
+					<div class="ml-3 fileInput">
+					</div>
+				</div>
+				</form>
 				
 				
 				
@@ -120,29 +99,16 @@ window.onload=function(){
 }	
 </script>
 <script>
-function f_alert(){
-	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#5969FF',
-		  cancelButtonColor: '#EF172C',
-		  confirmButtonText: 'Yes, delete it!'
-		}).then((result) => {
-		  if (result.isConfirmed) {
-		    Swal.fire(
-		      'Deleted!',
-		      'Your file has been deleted.',
-		      'success'
-		    )
-		  }
-	});
+
+
+function f_alert(arg){
+	Swal.fire(arg)
 		
 }
 
-</script>
-<script>
+
+var dataNum=0;
+
 function addFile_go(){
 	//alert("click add btn");
 	
@@ -168,4 +134,12 @@ function addFile_go(){
 function remove_go(dataNum){
 	$('div[data-no="'+dataNum+'"]').remove();
 }
+
+</script>
+<script>
+function f_alert(arg){
+	Swal.fire(arg)
+		
+}
+
 </script>
