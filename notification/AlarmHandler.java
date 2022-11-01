@@ -30,7 +30,7 @@ public class AlarmHandler extends TextWebSocketHandler {
 	//전체 세션
 	private static List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	//개인
-	private Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
+//	private Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
 	
 
 	//클라이언트가 서버에 접속 성공시 호출
@@ -38,32 +38,22 @@ public class AlarmHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.add(session); //리스트에 접속한 session들을 담음
 		
-		//연결하려는 클라이언트의 세션에서 id값 가져와 map에 id값으로 세션을 담는다
-		Map<String, Object> sessionGet = session.getAttributes();
-		String sessionId = (String) sessionGet.get("memId");
-		userSessionsMap.put(sessionId, session);
-
-		//세션확인
-		log.debug("세션들sessions"+sessions);
-		log.debug("유저세션맵userSessionsMap"+userSessionsMap);
 	}
 
+	
 	//소켓에 메세지를 보냈을 때 호출
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		for (WebSocketSession single : sessions) {
-//				log.debug("받은메세지 원본"+message);
-				String memId = message.getPayload();
-//				log.debug("받은 메세지 String"+memId);
-				
-				int count = alarmDAO.selectAlarmUchkCount(memId);
-				log.debug("카운트"+count);
-				if(count != 0) {
-					TextMessage sendMsg = new TextMessage(memId + "님 새 알림이 있습니다");
-					single.sendMessage(sendMsg);
-				}else {
-//					single.sendMessage(message);
-				}
+
+		for(WebSocketSession single : sessions) {
+			String memId = message.getPayload();
+			int count = alarmDAO.selectAlarmUchkCount(memId);
+			
+			//리스트에 담긴 세션의 id와 메세지를 보내줄 세션의 id가 같고, uchkList가 0이 아닐 경우 메세지 전송
+			if(single.getId().equals(session.getId()) && count != 0) {
+				TextMessage sendMsg = new TextMessage(memId + "님 새 알림이 있습니다");
+				single.sendMessage(sendMsg);
+			}
 		}
 	}
 
@@ -73,12 +63,5 @@ public class AlarmHandler extends TextWebSocketHandler {
 		//전체 세션리스트에서 세션 삭제 
 		sessions.remove(session);
 		
-		Map<String, Object> sessionGet = session.getAttributes();
-		String sessionId = (String) sessionGet.get("memId");
-		userSessionsMap.remove(sessionId, session);
-		
-		//세션확인
-		log.debug("세션들sessions"+sessions);
-		log.debug("유저세션맵userSessionsMap"+userSessionsMap);
 	}
 }
