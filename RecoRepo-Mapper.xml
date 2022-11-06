@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RecoRepo-Mapper">
+	<select id="selectRecoRepo" resultType="recoRepo">
+		select *
+		from reco_repo
+		where sha_bno = #{shaBno}
+		and stu_cd = #{stuCd}
+	</select>
+	
+	<select id="selectCountRecoRepo" parameterType="recoRepo" resultType="int">
+		select count(*)
+		from reco_repo
+		where sha_bno = #{shaBno}
+		and stu_cd = #{stuCd}
+	</select>
+	
+	<update id="insertRecoRepo">
+		insert into reco_repo(stu_cd, sha_bno, reco_chk, repo_chk)
+		values (#{stuCd},#{shaBno},#{recoChk}, #{repoChk})
+	</update>
+	<update id="updateReco">
+		update reco_repo
+		set reco_chk = #{recoChk} 
+		where sha_bno = #{shaBno}
+		and stu_cd = #{stuCd}
+	</update>
+	<update id="updateRepo">
+		update reco_repo
+		set repo_chk = #{repoChk} 
+		where sha_bno = #{shaBno}
+		and stu_cd = #{stuCd}
+	</update>
+</mapper>
