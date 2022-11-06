@@ -1,0 +1,143 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    
+<mapper namespace="Share-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and title like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'l'.toString()">
+			and lec_cd like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like '%'||#{keyword}||'%'			
+		</if>
+	</sql>
+	
+	<select id="selectShareByAll" parameterType="String" resultType="studyShare">
+		select *
+  		 from study_share
+  		 where board_div_cd='all'
+  		 and available=1
+  		 <include refid="search" />
+  		 order by cdate desc
+	</select>
+
+	<select id="selectShareByLec" parameterType="String" resultType="studyShare">
+		SELECT C.SUBJ_NAME, sha_bno, title, cdate, reco_num, view_cnt
+		FROM STUDY_SHARE A, SYLLABUS B, LEC_MANAGE C
+		WHERE A.LEC_CD = b.SYL_CD
+		and B.SUBJ_CD = C.SUBJ_CD
+		and available=1
+		and board_div_cd = 'lec'
+		<include refid="search" />
+		order by cdate desc
+	</select>
+
+	<select id="selectShareOrderByReco" resultType="studyShare">
+		select *
+  		 from study_share
+  		 where board_div_cd='all'
+  		 and available=1
+  		 <![CDATA[
+  		 and reco_num > 0
+  		 and ROWNUM <= 10 
+  		 ]]>
+  		 order by reco_num desc
+	</select>
+
+	<select id="selectShareByLecOrderByReco" resultType="studyShare">
+		SELECT C.SUBJ_NAME, sha_bno, title, cdate, reco_num, view_cnt
+	      FROM STUDY_SHARE A, SYLLABUS B, LEC_MANAGE C
+	     WHERE A.LEC_CD = b.SYL_CD
+	       and B.SUBJ_CD = C.SUBJ_CD
+	       and available=1
+	       and board_div_cd = 'lec'
+	       and available=1
+	       <![CDATA[
+	       and reco_num > 0
+	       and ROWNUM <= 10
+	       ]]>
+	     order by reco_num desc
+	</select>
+	
+	<select id="selectLecCdBySubjName" parameterType="str" resultType="str">
+		SELECT LEC_CD
+		FROM STUDY_SHARE A, SYLLABUS B, LEC_MANAGE C
+		WHERE A.LEC_CD = b.SYL_CD
+		and B.SUBJ_CD = C.SUBJ_CD
+		and c.subj_name like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="selectShare" parameterType="int" resultType="studyShare">
+		SELECT C.SUBJ_NAME, sha_bno, title, cdate, reco_num, view_cnt, content, stu_cd
+	      FROM STUDY_SHARE A, SYLLABUS B, LEC_MANAGE C
+	     WHERE A.LEC_CD = b.SYL_CD
+	       and B.SUBJ_CD = C.SUBJ_CD
+		   and sha_bno = #{shaBno}
+	</select>
+	
+	<select id="selectAllTotalCount" resultType="int">
+		select count(*)
+		from study_share
+		where board_div_cd= 'all'
+		<include refid="search" />
+		order by cdate desc
+	</select>
+	
+	<select id="selectLecTotalCount" resultType="int">
+		select count(*)
+		from study_share
+		where board_div_cd= 'lec'
+		<include refid="search" />
+		order by cdate desc
+	</select>
+	
+	<update id="insertShare">
+		insert into study_share(sha_bno, stu_cd, lec_cd, title, cdate, reco_num, view_cnt, board_div_cd, content, report_cnt, available)
+		values(#{shaBno}, #{stuCd}, ${lecCd}, #{title}, sysdate, #{reco_num}, #{view_cnt}, #{boardDivCd}, #{content}, #{reportCnt}, #{available})
+	</update>
+	
+	<update id="updateShare" parameterType="studyShare" >
+	    update study_share
+		   set title=#{title}, content=#{content}
+		 where sha_bno=#{shaBno}
+	</update>
+	
+	<update id="increaseViewCnt" parameterType="int">
+		update study_share
+		set view_cnt=view_cnt+1
+		where sha_bno = #{shaBno}
+	</update>
+	
+	<update id="increaseRecoNum" parameterType="int">
+		update study_share
+		set reco_num=reco_num+1
+		where sha_bno = #{shaBno}
+	</update>
+	<update id="increaseReportCnt" parameterType="int">
+		update study_share
+		set report_cnt=report_cnt+1
+		where sha_bno = #{shaBno}
+	</update>
+	
+	<select id="selectReportCnt" resultType="int">
+		select report_cnt
+		from study_share
+		where sha_bno = #{shaBno}
+	</select>
+	<update id="updateAvailable">
+		update study_share
+		set available = 0
+		where sha_bno = #{shaBno}
+	</update>
+	
+	<select id="selectShareSeqNext" resultType="int">
+		select sha_bno.nextval as sha_bno from dual
+	</select>
+
+	
+</mapper>
