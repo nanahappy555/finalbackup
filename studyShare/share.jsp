@@ -31,9 +31,16 @@
 				<div class="card-body" id="allCardBody">
 					<!-- ajax 시작 -->
 					<!-- ajax 끝 -->
-				</div>	
+				</div>
+				<c:if test="${loginUser.memClassCd eq 'stu' }">
+				<div class="row justify-content-end mr-3">
+					<button type="button" class="btn btn-md btn-primary"
+					onclick="OpenWindow('<%=request.getContextPath()%>/stu/support/share/registForm','학습법 등록하기',600,600);">성적우수학생만쓸수있게바꾸기글쓰기</button>
+				</div>
+				</c:if>
 				<div  class="row justify-content-center">
 						<ul id="allPagiUl" class="pagination justify-content-center m-0">
+							<!-- 페이지네이션 -->
 						</ul>
 				</div>
             </div>
@@ -48,8 +55,15 @@
 						<!-- ajax 시작 -->
 						<!-- ajax끝 -->
 					</div>
+					<c:if test="${loginUser.memClassCd eq 'stu' }">
+					<div class="row justify-content-end mr-3">
+						<button type="button" class="btn btn-md btn-primary"
+						onclick="OpenWindow('<%=request.getContextPath()%>/stu/support/share/registForm','학습법 등록하기',600,600);">성적우수학생만쓸수있게바꾸기글쓰기</button>
+					</div>
+					</c:if>
 					<div  class="row justify-content-center">
 							<ul id="lecPagiUl" class="pagination justify-content-center m-0">
+							<!-- 페이지네이션 -->
 							</ul>
 					</div>
 				</div>

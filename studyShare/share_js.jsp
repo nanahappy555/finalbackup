@@ -131,17 +131,17 @@
 			id="lecsearchType">
 			<option value="">검색구분</option>
 			{{#if (eq shareLecMap.pageMaker.cri.searchType 'l')}}
-			<option value="l" >과목명</option>
+			<option value="l" selected>과목명</option>
 			{{else}}
 			<option value="l" >과목명</option>
 			{{/if}}
 			{{#if (eq shareLecMap.pageMaker.cri.searchType 't')}}
-			<option value="t" >글제목</option>
+			<option value="t" selected>글제목</option>
 			{{else}}
 			<option value="t" >글제목</option>
 			{{/if}}
 			{{#if (eq shareLecMap.pageMaker.cri.searchType 'c')}}
-			<option value="c" >글내용</option>
+			<option value="c" selected>글내용</option>
 			{{else}}
 			<option value="c" >글내용</option>
 			{{/if}}
@@ -175,7 +175,7 @@
 	<tr class="evalRow" name="Lec" onclick="f_move(event);"
 		style="color:#5969FF;">
 		<td>BEST<div class="hiddenshaBno" style="display:none;">{{shaBno }}</div></td>
-		<td>{{subjName }}</td>
+		<td class="table-title">{{subjName }}</td>
 		<td class="table-title">{{title }}</td>
 		<td>{{prettifyDate cdate }}</td>
 		<td>{{recoNum }}</td>
@@ -187,7 +187,7 @@
 		<td>{{shaBno }} 
 			<div class="hiddenshaBno" style="display:none;">{{shaBno }}</div>
 		</td>
-		<td>{{subjName }}</td>
+		<td class="table-title">{{subjName }}</td>
 		<td class="table-title">{{title }}</td>
 		<td>{{prettifyDate cdate }}</td>
 		<td>{{recoNum }}</td>
@@ -302,7 +302,7 @@ Handlebars.registerHelper({
 		var year=dateObj.getFullYear();
 		var month=dateObj.getMonth()+1;
 		var date=dateObj.getDate();
-		return year+"/"+month+"/"+date;
+		return year+"-"+month+"-"+date;
 	},
 	"allsignActive":function(pageNum){
 		if(pageNum == allPage) return 'active';
@@ -320,7 +320,10 @@ Handlebars.registerHelper('if_eq', function(a, b, opts) {
     else
         return opts.inverse(this);
 });
-Handlebars.registerHelper('eq', (a, b) => a == b);
+Handlebars.registerHelper('eq', (a, b) => a == b); //return boolean
+Handlebars.registerHelper('bno', function(page,perPageNum,index){
+	return page;
+});
 </script>
 <script>
 
@@ -352,12 +355,10 @@ var getAll = function(pageUrl,paramPage) {
 		url: pageUrl+paramPage,
 		dataType:'json',
 		success: (rslt)=>{
-// 			console.log(rslt.shareAllMap);
+// 			console.log(rslt.shareAllMap.pageMaker);
 			
 			printData(rslt,$('#allCardBody'),$('#all-list-template'));
-			console.log('리스트끝');
 			printPagination(rslt.shareAllMap.pageMaker,$('#allPagiUl'),$('#all-pagination-template'));
-			console.log('페이지');
 			
 		},
 		error: ()=>{
@@ -396,7 +397,7 @@ function list_go_all(paramPage){
 		method:'get',
 		url:paramUrl,
 		success: (rslt) => {
-			console.log("ppp",rslt.shareAllMap.pageMaker.cri);
+// 			console.log("올크리",rslt.shareAllMap.pageMaker.cri);
 			printData(rslt,$('#allCardBody'),$('#all-list-template'));
 			printPagination(rslt.shareAllMap.pageMaker,$('#allPagiUl'),$('#all-pagination-template'));
 		},
@@ -418,6 +419,7 @@ function list_go_lec(paramPage){
 		method:'get',
 		url:paramUrl,
 		success: (rslt) => {
+// 			console.log("렉크리",rslt.shareLecMap.pageMaker.cri);
 			printData(rslt,$('#lecCardBody'),$('#lec-list-template'));
 			printPagination(rslt.shareLecMap.pageMaker,$('#lecPagiUl'),$('#lec-pagination-template'));
 		},
